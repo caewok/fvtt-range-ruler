@@ -45,13 +45,13 @@ Hooks.on("getSceneControlButtons", controls => {
 		rangeRulerTool = {
 			name: "rangeRuler",
 			title: `${MODULE_ID}.rangeRuler`,
-			icon: "fal fa-bow-arrow",
+			icon: "fas fa-people-arrows",
 			toggle: true,
-			active: terrainRuler?.active,
-			onClick: toggled => terrainRuler.active = toggled,
+			active: rangeRuler?.active,
+			onClick: toggled => rangeRuler.active = toggled,
 			visible: true,
 		}
 	}
 	const tokenControls = controls.find(group => group.name === "token").tools
-	tokenControls.splice(tokenControls.findIndex(tool => tool.name === "ruler") + 1, 0, terrainRulerTool)
+	tokenControls.splice(tokenControls.findIndex(tool => tool.name === "ruler") + 1, 0, rangeRulerTool)
 })
