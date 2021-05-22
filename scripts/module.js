@@ -14,9 +14,13 @@ export function log(...args) {
 }
 
 Hooks.once('init', async function() {
-   log("Initializing Range Ruler Options.");
+   console.log("range-ruler|Initializing Range Ruler Options.");
+});
+
+Hooks.once('setup', async function() {
+  log("Readying.");
 });
 
 Hooks.once('ready', async function() {
-   log("Readying Range Ruler.");
+   log("range-ruler|Readying Range Ruler.");
 });
