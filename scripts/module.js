@@ -54,4 +54,13 @@ Hooks.on("getSceneControlButtons", controls => {
 	}
 	const tokenControls = controls.find(group => group.name === "token").tools
 	tokenControls.splice(tokenControls.findIndex(tool => tool.name === "ruler") + 1, 0, rangeRulerTool)
-})
+});
+
+Hooks.once('libRulerReady', async function() {
+  log("libRuler is ready to go.");
+ 
+  // tell modules that the rangeRuler is set up
+  Hooks.callAll('rangeRulerReady');
+
+});
+
