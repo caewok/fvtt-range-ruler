@@ -1,3 +1,5 @@
+import { registerRuler } from "./patching.js";
+
 export const MODULE_ID = 'range-ruler';
 const FORCE_DEBUG = true; // used for logging before dev mode is set up
 
@@ -58,6 +60,7 @@ Hooks.on("getSceneControlButtons", controls => {
 
 Hooks.once('libRulerReady', async function() {
   log("libRuler is ready to go.");
+  registerRuler();
  
   // tell modules that the rangeRuler is set up
   Hooks.callAll('rangeRulerReady');
