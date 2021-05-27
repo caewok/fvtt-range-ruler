@@ -23,23 +23,23 @@ export function rangeRulerGetText(wrapped, ...args) {
 export function rangeRulerColorForPosition(wrapped, position) {
   // Mimics drag ruler implementation
   // proof of concept
-  const COLOR_RANGES = [{id: "close", color: 0x00FF00, max: 20},
-                        {id: "far",   color: 0xFFFF00, max: 60}];
-                        
-  const COLOR_UNREACHABLE = 0xFF0000;
-                        
   if(!window.rangeRuler.active) return wrapped(position);
   
+  const COLOR_RANGES = [{id: "close", color: 0x00FF00, max: 20},
+                        {id: "far",   color: 0xFFFF00, max: 60}];
+  const COLOR_UNREACHABLE = 0xFF0000;
+                        
   const distance = this.totalPriorDistance + this.measureDistance(position);
-  log(`Distance to postion: ${distance}`);
-  
-  const color = COLOR_RANGES.reduce((minColor, currentColor) => {
-    if(distance < currentColor.max) return currentColor.color;
+  const color = COLOR_RANGES.reduce((minColor, currentRange) => {
+    if(distance <= currentRange.max) return currentRange.color;
     return minColor;
   }, COLOR_UNREACHABLE);
   
+  log(`Distance to position: ${distance}. Color: ${color}`);
+  
   return color;
 }
+
 
 /*
  * For testing libRuler, add a modifier to the distance
@@ -48,9 +48,9 @@ export function rangeRulerColorForPosition(wrapped, position) {
 export function rangeRulerGetDistanceModifiers(wrapped, ...args) {
   const modifiers_array = wrapped(...args);
 
-  if(!window.rangeRuler.active & this.segment_num === 0) {
-    modifiers_array.push("-10");
-  }
+//   if(window.rangeRuler.active & this.segment_num === 0) {
+//     modifiers_array.push("-10");
+//   }
 
   return modifiers_array;
 }
