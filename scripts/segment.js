@@ -30,19 +30,19 @@ export function rangeRulerColorForPosition(wrapped, position) {
   const COLOR_UNREACHABLE = 0xFF0000;
                         
   const distance = this.totalPriorDistance + this.measureDistance(position);
-  const color = COLOR_RANGES.reduce((minRange, currentRange) => {
+  const selected_range = COLOR_RANGES.reduce((minRange, currentRange) => {
     if(distance <= currentRange.max && currentRange.max <= minRange.max) {
       log(`Use current: ${distance}, ${currentRange.max}, ${minRange.max}`);
-      return currentRange.color;
+      return currentRange;
     } else {
       log(`Use min: ${distance}, ${currentRange.max}, ${minRange.max}`);
     }
     return minRange;
-  }, {max: Infinity, color: COLOR_UNREACHABLE);
+  }, { max: Infinity, color: COLOR_UNREACHABLE });
   
-  log(`Distance to position: ${distance}. Color: ${color}`);
+  log(`Distance to position: ${distance}. Color: ${selected_range.color}`);
   
-  return color;
+  return selected_range.color;
 }
 
 /*
@@ -52,9 +52,9 @@ export function rangeRulerColorForPosition(wrapped, position) {
 export function rangeRulerGetDistanceModifiers(wrapped, ...args) {
   const modifiers_array = wrapped(...args);
 
-//   if(window.rangeRuler.active & this.segment_num === 0) {
-//     modifiers_array.push("-10");
-//   }
+   if(window.rangeRuler.active & this.segment_num === 0) {
+     modifiers_array.push("-10");
+   }
 
   return modifiers_array;
 }
