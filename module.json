@@ -3,7 +3,7 @@
   "title": "Range Ruler",
   "description": "Add a button to select a ranged weapon and switch the Foundry ruler to measure that weapon range, with short/long range as appropriate.",
   "version": "This is auto replaced",
-  "library": "false",
+  "library": false,
   "manifestPlusVersion": "1.0.0",
   "minimumCoreVersion": "0.7.9",
   "compatibleCoreVersion": "0.7.9",
