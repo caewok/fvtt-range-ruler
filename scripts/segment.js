@@ -31,7 +31,12 @@ export function rangeRulerColorForPosition(wrapped, position) {
                         
   const distance = this.totalPriorDistance + this.measureDistance(position);
   const color = COLOR_RANGES.reduce((minColor, currentRange) => {
-    if(distance <= currentRange.max) return currentRange.color;
+    if(Number(distance) <= Number(currentRange.max)) {
+      log(`${distance} less than / equal ${currentRange.max}`, currentRange);
+      return currentRange.color;
+    } else {
+      log(`${distance} not less than / equal ${currentRange.max}`, currentRange);
+    }
     return minColor;
   }, COLOR_UNREACHABLE);
   
