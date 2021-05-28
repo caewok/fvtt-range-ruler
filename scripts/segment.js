@@ -30,21 +30,20 @@ export function rangeRulerColorForPosition(wrapped, position) {
   const COLOR_UNREACHABLE = 0xFF0000;
                         
   const distance = this.totalPriorDistance + this.measureDistance(position);
-  const color = COLOR_RANGES.reduce((minColor, currentRange) => {
-    if(Number(distance) <= Number(currentRange.max)) {
-      log(`${distance} less than / equal ${currentRange.max}`, currentRange);
+  const color = COLOR_RANGES.reduce((minRange, currentRange) => {
+    if(distance <= currentRange.max && currentRange.max <= minRange.max) {
+      log(`Use current: ${distance}, ${currentRange.max}, ${minRange.max}`);
       return currentRange.color;
     } else {
-      log(`${distance} not less than / equal ${currentRange.max}`, currentRange);
+      log(`Use min: ${distance}, ${currentRange.max}, ${minRange.max}`);
     }
-    return minColor;
-  }, COLOR_UNREACHABLE);
+    return minRange;
+  }, {max: Infinity, color: COLOR_UNREACHABLE);
   
   log(`Distance to position: ${distance}. Color: ${color}`);
   
   return color;
 }
-
 
 /*
  * For testing libRuler, add a modifier to the distance
