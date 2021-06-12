@@ -1,3 +1,7 @@
+## 0.0.1-alpha3
+Incorporate libRuler 0.0.5 changes.
+- Switch to `modifyDistanceResult` function.
+
 ## 0.0.1-alpha2
 
 Incorporate libRuler and various improvements.
