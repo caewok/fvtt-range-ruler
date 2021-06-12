@@ -49,12 +49,12 @@ export function rangeRulerColorForPosition(wrapped, position) {
  * For testing libRuler, add a modifier to the distance
  * Let's assume it is a magic throw that gives you 10 for free the first segment
  */
-export function rangeRulerGetDistanceModifiers(wrapped, ...args) {
-  const modifiers_array = wrapped(...args);
+export function rangeRulerModifyDistanceResult(wrapped, ...args) {
+  let measured_distance = wrapped(...args);
 
    if(window.rangeRuler.active & this.segment_num === 0) {
-     modifiers_array.push("-10");
+     measured_distance = max(0, measured_distance - 10);
    }
 
-  return modifiers_array;
+  return measured_distance;
 }
