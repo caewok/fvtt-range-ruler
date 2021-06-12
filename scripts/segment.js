@@ -53,7 +53,7 @@ export function rangeRulerModifyDistanceResult(wrapped, ...args) {
   let measured_distance = wrapped(...args);
 
    if(window.rangeRuler.active & this.segment_num === 0) {
-     measured_distance = max(0, measured_distance - 10);
+     measured_distance = Math.max(0, measured_distance - 10);
    }
 
   return measured_distance;
